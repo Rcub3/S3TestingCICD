@@ -24,7 +24,7 @@ jobs:
         password: ${{ secrets.GITHUB_TOKEN }}
 
     - name: Convert repository name to lowercase
-      run: echo "REPO_NAME=$(echo ${{ github.repository_owner }}/$(echo ${{ github.event.repository.name }} | tr '[:upper:]' '[:lower:]' | tr -cd '[:alnum:]_-'))" >> $GITHUB_ENV
+      run: echo "REPO_NAME=$(echo '${{ github.repository }}' | tr '[:upper:]' '[:lower:]')" >> $GITHUB_ENV
 
     - name: Build and tag the Docker image
       run: |
@@ -35,3 +35,4 @@ jobs:
       run: |
         docker push ghcr.io/${{ env.REPO_NAME }}/random-number-app:latest
         docker push ghcr.io/${{ env.REPO_NAME }}/random-number-app:${{ github.sha }}
+

@@ -22,16 +22,14 @@ jobs:
         username: ${{ secrets.DOCKER_HUB_USERNAME }}
         password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
 
-    - name: Convert repository name to lowercase
-      run: echo "REPO_NAME=$(echo '${{ github.repository }}' | tr '[:upper:]' '[:lower:]' | cut -d'/' -f2)" >> $GITHUB_ENV
-
     - name: Build and tag the Docker image
       run: |
-        docker build -t ${{ secrets.DOCKER_HUB_USERNAME }}/${{ env.REPO_NAME }}:latest .
-        docker tag ${{ secrets.DOCKER_HUB_USERNAME }}/${{ env.REPO_NAME }}:latest ${{ secrets.DOCKER_HUB_USERNAME }}/${{ env.REPO_NAME }}:${{ github.sha }}
+        docker build -t rcube1/s3testingcicd:latest .
+        docker tag rcube1/s3testingcicd:latest rcube1/s3testingcicd:${{ github.sha }}
 
     - name: Push the Docker image
       run: |
-        docker push ${{ secrets.DOCKER_HUB_USERNAME }}/${{ env.REPO_NAME }}:latest
-        docker push ${{ secrets.DOCKER_HUB_USERNAME }}/${{ env.REPO_NAME }}:${{ github.sha }}
+        docker push rcube1/s3testingcicd:latest
+        docker push rcube1/s3testingcicd:${{ github.sha }}
+
 

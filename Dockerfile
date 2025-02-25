@@ -4,8 +4,8 @@ FROM golang:1.20 AS builder
 # Set the working directory inside the container
 WORKDIR /app
 
-# Copy the Go script into the container
-COPY main.go .
+# Copy the randnumb.go script into the container (use the correct file name)
+COPY randnumb.go .
 
 # Download necessary Go modules (if any)
 RUN go mod init random-server && go mod tidy
@@ -27,3 +27,4 @@ EXPOSE 8080
 
 # Run the server binary
 CMD ["./server"]
+

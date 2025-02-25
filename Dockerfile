@@ -4,17 +4,30 @@ FROM golang:1.21 as builder
 # Set the working directory
 WORKDIR /app
 
-# Copy the source code
+# Copy go.mod and go.sum first (for better caching)
+COPY go.mod go.sum ./
+
+# Download dependencies
+RUN go mod tidy
+
+# Copy the rest of the source code
 COPY . .
 
-# Build the Go binary
-RUN go mod init app && go mod tidy && go build -o server .
+# Build the Go binary with optimizations
+RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o server .
 
 # Use a minimal base image
 FROM alpine:latest
 
+# Install CA certificates
+RUN apk --no-cache add ca-certificates
+
+# Set a non-root user for security
+RUN addgroup -S app && adduser -S app -G app
+USER app
+
 # Set the working directory
-WORKDIR /root/
+WORKDIR /home/app
 
 # Copy the compiled Go binary from builder stage
 COPY --from=builder /app/server .

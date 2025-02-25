@@ -32,4 +32,3 @@ jobs:
         docker push rcube1/s3testingcicd:latest
         docker push rcube1/s3testingcicd:${{ github.sha }}
 
-

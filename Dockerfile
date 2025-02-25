@@ -1,29 +1,21 @@
-# Use the official Golang image to build the application
-FROM golang:1.20 AS builder
+# Use an official Python runtime as a parent image
+FROM python:3.9-slim
 
-# Set the working directory inside the container
+# Set the working directory in the container
 WORKDIR /app
 
-# Copy the randnumb.go script into the container
-COPY randnumb.go .
+# Install dependencies (including tkinter and other required packages)
+RUN apt-get update && apt-get install -y \
+    python3-tk \
+    libx11-dev \
+    libgtk-3-dev \
+    && rm -rf /var/lib/apt/lists/*
 
-# Download necessary Go modules (if any)
-RUN go mod init random-server && go mod tidy
+# Copy the current directory contents into the container at /app
+COPY . /app
 
-# Build the Go application
-RUN go build -o server .
+# Install Python dependencies
+RUN pip install --no-cache-dir -r requirements.txt
 
-# Use a lightweight image to run the built application
-FROM alpine:latest
-
-# Set the working directory
-WORKDIR /root/
-
-# Copy the compiled binary from the builder stage
-COPY --from=builder /app/server /root/
-
-# Expose port 8080 for the web server
-EXPOSE 8080
-
-# Run the server binary
-CMD ["./server"]
+# Set the default command to run the Python script
+CMD ["python", "password_generator_gui.py"]

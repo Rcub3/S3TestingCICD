@@ -1,20 +1,19 @@
 # Use the official Golang image to build the application
-FROM golang:1.21 AS builder
+FROM golang:1.20 AS builder
 
 # Set the working directory inside the container
 WORKDIR /app
 
-# Copy Go module files first for efficient caching
-COPY go.mod go.sum ./
-RUN go mod download
+# Copy the Go script into the container
+COPY main.go .
 
-# Copy the rest of the application files
-COPY . .
+# Download necessary Go modules (if any)
+RUN go mod init random-server && go mod tidy
 
 # Build the Go application
-RUN go build -o server .
+RUN go build -o server
 
-# Use a lightweight image for running the built binary
+# Use a lightweight image to run the built application
 FROM alpine:latest
 
 # Set the working directory
@@ -23,8 +22,8 @@ WORKDIR /root/
 # Copy the compiled binary from the builder stage
 COPY --from=builder /app/server .
 
-# Expose the port the app runs on
+# Expose port 8080 for the web server
 EXPOSE 8080
 
-# Run the application
+# Run the server binary
 CMD ["./server"]

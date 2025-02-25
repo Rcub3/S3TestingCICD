@@ -1,5 +1,5 @@
 package main
-
+// main package
 import (
     "fmt"
     "html/template"

@@ -43,3 +43,4 @@ jobs:
           docker push ${{ secrets.DOCKER_HUB_USERNAME }}/password-generator-web:latest  
           # Pusht de image naar Docker Hub
 
+

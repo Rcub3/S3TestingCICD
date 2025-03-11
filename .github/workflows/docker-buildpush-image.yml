@@ -1,43 +1,45 @@
-name: Build and Push Docker Image
+name: Build and Push Docker Image  # Naam van de workflow
 
 on:
   push:
     branches:
-      - main  # Trigger the workflow on push to the main branch
+      - main  # Workflow wordt geactiveerd bij een push naar de 'main' branch
   pull_request:
     branches:
-      - main  # Also trigger on pull requests to the main branch
+      - main  # Workflow wordt ook geactiveerd bij pull requests naar de 'main' branch
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest  # De job wordt uitgevoerd op een Ubuntu-machine
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v4  # Haalt de repository code op zodat de workflow ermee kan werken
 
       - name: Log in to Docker Hub
-        uses: docker/login-action@v2
+        uses: docker/login-action@v2  # Logt in op Docker Hub met behulp van geheimen
         with:
-          username: ${{ secrets.DOCKER_HUB_USERNAME }}
-          password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
+          username: ${{ secrets.DOCKER_HUB_USERNAME }}  # Gebruikersnaam uit GitHub Secrets
+          password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}  # Toegangstoken uit GitHub Secrets
 
       - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v2
+        uses: docker/setup-buildx-action@v2  # Stelt Docker Buildx in, wat geavanceerde build-mogelijkheden biedt
 
       - name: Cache Docker layers
-        uses: actions/cache@v3  # Updated to v3
+        uses: actions/cache@v3  # Cacht Docker-buildlagen om builds te versnellen
         with:
-          path: /tmp/.buildx-cache
-          key: ${{ runner.os }}-buildx-${{ github.sha }}
+          path: /tmp/.buildx-cache  # Pad waar de cache wordt opgeslagen
+          key: ${{ runner.os }}-buildx-${{ github.sha }}  # Unieke sleutel voor de cache op basis van commit SHA
           restore-keys: |
-            ${{ runner.os }}-buildx-
+            ${{ runner.os }}-buildx-  # Als er geen exacte match is, wordt een eerder opgeslagen cache gebruikt
 
       - name: Build Docker image
         run: |
-          docker build -t ${{ secrets.DOCKER_HUB_USERNAME }}/password-generator-web:latest .
+          docker build -t ${{ secrets.DOCKER_HUB_USERNAME }}/password-generator-web:latest .  
+          # Bouwt de Docker-image en tagt deze als 'latest' met de Docker Hub-gebruikersnaam
 
       - name: Push Docker image to Docker Hub
         run: |
-          docker push ${{ secrets.DOCKER_HUB_USERNAME }}/password-generator-web:latest
+          docker push ${{ secrets.DOCKER_HUB_USERNAME }}/password-generator-web:latest  
+          # Pusht de image naar Docker Hub
 

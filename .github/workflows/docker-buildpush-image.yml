@@ -26,12 +26,12 @@ jobs:
         uses: docker/setup-buildx-action@v2  # Stelt Docker Buildx in, wat geavanceerde build-mogelijkheden biedt
 
       - name: Cache Docker layers
-        uses: actions/cache@v3  # Cacht Docker-buildlagen om builds te versnellen
+        uses: actions/cache@v3  
         with:
-          path: /tmp/.buildx-cache  # Pad waar de cache wordt opgeslagen
-          key: ${{ runner.os }}-buildx-${{ github.sha }}  # Unieke sleutel voor de cache op basis van commit SHA
+          path: /tmp/.buildx-cache  
+          key: ${{ runner.os }}-buildx-${{ github.sha }}  
           restore-keys: |
-            ${{ runner.os }}-buildx-  # Als er geen exacte match is, wordt een eerder opgeslagen cache gebruikt
+            ${{ runner.os }}-buildx-
 
       - name: Build Docker image
         run: |

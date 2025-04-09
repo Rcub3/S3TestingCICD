@@ -32,19 +32,11 @@ jobs:
           key: ${{ runner.os }}-buildx-${{ github.sha }}  
           restore-keys: |
             ${{ runner.os }}-buildx-
-
       - name: Build Docker image
         run: |
           docker build -t ${{ secrets.DOCKER_HUB_USERNAME }}/password-generator-web:latest .  
           # Bouwt de Docker-image en tagt deze als 'latest' met de Docker Hub-gebruikersnaam
-
       - name: Push Docker image to Docker Hub
         run: |
           docker push ${{ secrets.DOCKER_HUB_USERNAME }}/password-generator-web:latest  
           # Pusht de image naar Docker Hub
-
-       - name: Trigger Swarm update
-        run: |
-          curl -X POST http://10.20.30.15:5001/trigger-update   
-
-

@@ -43,4 +43,8 @@ jobs:
           docker push ${{ secrets.DOCKER_HUB_USERNAME }}/password-generator-web:latest  
           # Pusht de image naar Docker Hub
 
+       - name: Trigger Swarm update
+        run: |
+          curl -X POST http://10.20.30.15:5001/trigger-update   
+
 

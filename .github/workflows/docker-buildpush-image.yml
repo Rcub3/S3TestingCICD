@@ -10,7 +10,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest  # De job wordt uitgevoerd op een Ubuntu-machine
+    runs-on: [self-hosted, linux]  # De job wordt uitgevoerd op je zelf-gehoste runner (Linux) in plaats van Ubuntu-latest
 
     steps:
       - name: Checkout code
@@ -40,3 +40,4 @@ jobs:
         run: |
           docker push ${{ secrets.DOCKER_HUB_USERNAME }}/password-generator-web:latest  
           # Pusht de image naar Docker Hub
+

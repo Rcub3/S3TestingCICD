@@ -10,7 +10,8 @@ on:
 
 jobs:
   build:
-    runs-on: [self-hosted, linux]  # De job wordt uitgevoerd op je zelf-gehoste runner (Linux) in plaats van Ubuntu-latest
+    runs-on: Ubuntu-latest
+    # [self-hosted, linux]  # De job wordt uitgevoerd op je zelf-gehoste runner (Linux) in plaats van Ubuntu-latest
 
     steps:
       - name: Checkout code

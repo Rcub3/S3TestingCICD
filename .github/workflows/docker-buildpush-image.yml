@@ -10,8 +10,8 @@ on:
 
 jobs:
   build:
-    runs-on: [self-hosted, linux]
-    # Ubuntu-latest  # De job wordt uitgevoerd op je zelf-gehoste runner (Linux) in plaats van Ubuntu-latest
+    runs-on: Ubuntu-latest
+    # [self-hosted, linux]  # De job wordt uitgevoerd op je zelf-gehoste runner (Linux) in plaats van Ubuntu-latest
 
     steps:
       - name: Checkout code
@@ -41,6 +41,9 @@ jobs:
         run: |
           docker push ${{ secrets.DOCKER_HUB_USERNAME }}/password-generator-web:latest  
           # Pusht de image naar Docker Hub
+  deploy:
+    runs-on: [self-hosted, linux]
+    steps:
       - name: Update Docker Swarm service
         run: |
           sudo /home/student/smart-swarm-update.sh

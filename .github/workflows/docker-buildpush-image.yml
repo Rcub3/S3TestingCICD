@@ -41,6 +41,7 @@ jobs:
         run: |
           docker push ${{ secrets.DOCKER_HUB_USERNAME }}/password-generator-web:latest  
           # Pusht de image naar Docker Hub
+  deploy: 
     runs-on: [self-hosted, linux]
     steps:
       - name: Update Docker Swarm service

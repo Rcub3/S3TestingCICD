@@ -47,7 +47,7 @@ def index():
         </style>
       </head>
       <body>
-        <h1>Random Password Generator</h1>
+        <h1>Random Password Generator(RPG)</h1>
         <div class="password-container">
           Generated Password: {{ password }}  <!-- Weergave van het gegenereerde wachtwoord -->
         </div>

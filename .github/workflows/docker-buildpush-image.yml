@@ -43,6 +43,8 @@ jobs:
           # Pusht de image naar Docker Hub
   deploy: 
     runs-on: [self-hosted, linux]
+    needs: build
+    
     steps:
       - name: Update Docker Swarm service
         run: |

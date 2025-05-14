@@ -29,8 +29,8 @@ def index():
     Returns:
         HTML-pagina met een willekeurig gegenereerd wachtwoord.
     """
-    # Genereert een nieuw wachtwoord met een lengte van 12 tekens
-    password = generate_password(12)
+    # Genereert een nieuw wachtwoord met een lengte van 14 tekens
+    password = generate_password(14)
     
     # HTML-template om het wachtwoord weer te geven
     html = """

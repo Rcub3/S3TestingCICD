@@ -40,10 +40,9 @@ def index():
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Password Generator</title>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
         <style>
-          body { font-family: Arial, sans-serif; text-align: center; margin-top: 50px; }
-          .password-container { font-size: 24px; font-weight: bold; margin-top: 20px; }
-          .generate-button { padding: 10px 20px; font-size: 16px; cursor: pointer; }
+          body { font-family: 'Inter', sans-serif; }
         </style>
       </head>
       <body>

@@ -5,12 +5,12 @@ from flask import Flask, render_template_string  # Importeert Flask en een metho
 # Initialiseer een Flask-applicatie
 app = Flask(__name__)
 
-def generate_password(length=12):
+def generate_password(length=14):
     """
     Genereert een willekeurig wachtwoord met de opgegeven lengte.
     
     Parameters:
-        length (int): De lengte van het gegenereerde wachtwoord (standaard is 12).
+        length (int): De lengte van het gegenereerde wachtwoord (standaard is 14).
     
     Returns:
         str: Een willekeurig wachtwoord bestaande uit letters, cijfers en speciale tekens.

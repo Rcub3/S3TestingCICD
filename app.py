@@ -4,13 +4,13 @@ from flask import Flask, render_template_string
 
 app = Flask(__name__)
 
-def generate_password(length=15):
+def generate_password(length=8):
     all_characters = string.ascii_letters + string.digits + string.punctuation
     return ''.join(random.choice(all_characters) for _ in range(length))
 
 @app.route('/')
 def index():
-    password = generate_password(15)
+    password = generate_password(8)
     html = """
     <!doctype html>
     <html lang="en">

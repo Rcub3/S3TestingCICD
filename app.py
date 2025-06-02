@@ -93,8 +93,7 @@ def index():
       </head>
       <body>
         <div class="container">
-          <h1>🔐 Random Password Generator</h1>
-          <h2>Vicky Li</h2>
+          <h1>🔐 Random Password Generator(Vicky Li)</h1>
           <div class="password-container" id="generated-password">{{ password }}</div>
 
           <div class="button-row">

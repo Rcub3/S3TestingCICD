@@ -4,20 +4,20 @@ from flask import Flask, render_template_string
 
 app = Flask(__name__)
 
-def generate_password(length=12):
+def generate_password(length=6):
     all_characters = string.ascii_letters + string.digits + string.punctuation
     return ''.join(random.choice(all_characters) for _ in range(length))
 
 @app.route('/')
 def index():
-    password = generate_password(12)
+    password = generate_password(6)
     html = """
     <!doctype html>
     <html lang="en">
       <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Password Generator</title>
+        <title>Random Password Generator</title>
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
         <style>
           body {

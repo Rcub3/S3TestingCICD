@@ -11,7 +11,7 @@ on:
 jobs:
   build:
     runs-on: Ubuntu-latest
-    # [self-hosted, linux]  # De job wordt uitgevoerd op je zelf-gehoste runner (Linux) in plaats van Ubuntu-latest
+    # De job wordt uitgevoerd op een github gehoste runner (ubuntu-latest)
 
     steps:
       - name: Checkout code
